@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
 class UpdateTaskScreen extends StatelessWidget {
@@ -16,7 +17,13 @@ class UpdateTaskScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: const Text('UPDATE TASK'),
+        title: Text(
+          'Update Task',
+          style: GoogleFonts.roboto(
+            fontWeight: FontWeight.bold,
+            fontSize: 22,
+          ),
+        ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -24,11 +31,26 @@ class UpdateTaskScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(22.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 50),
+              const SizedBox(height: 20),
+              Text(
+                'Title',
+                style: GoogleFonts.roboto(
+                  fontSize: 19,
+                  fontWeight: FontWeight.w500,
+                  color: const Color.fromARGB(255, 77, 77, 77),
+                ),
+              ),
+              const SizedBox(height: 10),
               TextFormField(
                 controller: titleEditController,
                 decoration: const InputDecoration(
+                  filled: true,
+                  fillColor: Color.fromARGB(255, 254, 237, 85),
+                  border: UnderlineInputBorder(
+                    borderSide: BorderSide.none,
+                  ),
                   hintText: 'title',
                   hintStyle: TextStyle(
                     fontSize: 18,
@@ -38,10 +60,24 @@ class UpdateTaskScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 30),
+              Text(
+                'Discription',
+                style: GoogleFonts.roboto(
+                  fontSize: 19,
+                  fontWeight: FontWeight.w500,
+                  color: const Color.fromARGB(255, 77, 77, 77),
+                ),
+              ),
+              const SizedBox(height: 10),
               TextFormField(
                 controller: discriptionEditController,
                 maxLines: 5,
                 decoration: const InputDecoration(
+                  filled: true,
+                  fillColor: Color.fromARGB(255, 254, 237, 85),
+                  border: UnderlineInputBorder(
+                    borderSide: BorderSide.none,
+                  ),
                   hintText: 'Discription',
                   hintStyle: TextStyle(
                     fontSize: 15,
@@ -57,9 +93,11 @@ class UpdateTaskScreen extends StatelessWidget {
                   child: ElevatedButton(
                       style: const ButtonStyle(
                           shape: MaterialStatePropertyAll(
-                              BeveledRectangleBorder()),
-                          backgroundColor: MaterialStatePropertyAll(
-                              Color.fromARGB(255, 44, 44, 44))),
+                              BeveledRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(8)))),
+                          backgroundColor:
+                              MaterialStatePropertyAll(Colors.orange)),
                       onPressed: () {
                         updateData(
                             titleEditController: titleEditController,
@@ -67,7 +105,14 @@ class UpdateTaskScreen extends StatelessWidget {
                                 discriptionEditController,
                             context: context);
                       },
-                      child: const Text('update')))
+                      child: Text(
+                        'update',
+                        style: GoogleFonts.roboto(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      )))
             ],
           ),
         ),

@@ -1,21 +1,55 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:to_do/screens/list_of_task.dart';
+import 'package:http/http.dart' as http;
+import 'package:to_do/screens/search_screen.dart';
 
 class HomeMain extends StatelessWidget {
   const HomeMain({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
-              HomeCard(),
+              const SizedBox(height: 30),
               Padding(
-                padding: EdgeInsets.only(left: 18.0, right: 18),
+                  padding: const EdgeInsets.only(left: 25.0, right: 25),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (ctx) => const SearchScreen()));
+                    },
+                    child: Container(
+                      height: 45,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: Colors.grey,
+                          width: .9,
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Text(
+                          'Search here',
+                          style: GoogleFonts.aBeeZee(
+                            letterSpacing: 1,
+                          ),
+                        ),
+                      ),
+                    ),
+                  )),
+              const HomeCard(),
+              Padding(
+                padding: const EdgeInsets.only(left: 18.0, right: 18),
                 child: SizedBox(
                   height: 420,
                   width: double.infinity,
@@ -25,20 +59,37 @@ class HomeMain extends StatelessWidget {
                         width: 180,
                         height: double.infinity,
                         child: Padding(
-                          padding: EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(10.0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              BuildSmallBoxHome(
-                                  text1: 'View',
-                                  text2: 'Calender',
-                                  image:
-                                      'asset/images-calander-removebg-preview.png'),
-                              BuildBIgBoxHome(
-                                  text1: "Add New",
-                                  text2: "Task",
-                                  image:
-                                      'asset/images__1_-removebg-preview.png'),
+                              InkWell(
+                                onTap: () {
+                                  showDatePicker(
+                                      context: context,
+                                      firstDate: DateTime(2000),
+                                      lastDate: DateTime(3000));
+                                },
+                                child: const BuildSmallBoxHome(
+                                    text1: 'View',
+                                    text2: 'Calender',
+                                    image:
+                                        'asset/images-calander-removebg-preview.png'),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  showModalBottomSheet(
+                                      context: context,
+                                      builder: (context) {
+                                        return const BuildBottomSheet();
+                                      });
+                                },
+                                child: const BuildBIgBoxHome(
+                                    text1: "Add New",
+                                    text2: "Task",
+                                    image:
+                                        'asset/images__1_-removebg-preview.png'),
+                              ),
                             ],
                           ),
                         ),
@@ -47,16 +98,24 @@ class HomeMain extends StatelessWidget {
                         width: 180,
                         height: double.infinity,
                         child: Padding(
-                          padding: EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                BuildBIgBoxHome(
-                                    text1: "View Today",
-                                    text2: "Task",
-                                    image:
-                                        'asset/Screenshot 2023-12-09 165120.png'),
-                                BuildSmallBoxHome(
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (ctx) =>
+                                                const ListOfTask()));
+                                  },
+                                  child: const BuildBIgBoxHome(
+                                      text1: "View All",
+                                      text2: "Task",
+                                      image:
+                                          'asset/Screenshot 2023-12-09 165120.png'),
+                                ),
+                                const BuildSmallBoxHome(
                                     text1: 'View',
                                     text2: 'My Status',
                                     image:
@@ -68,12 +127,177 @@ class HomeMain extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 50),
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+class BuildBottomSheet extends StatelessWidget {
+  const BuildBottomSheet({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    TextEditingController titleEditingController = TextEditingController();
+    TextEditingController discriptionEdController = TextEditingController();
+    return Container(
+      decoration: const BoxDecoration(
+        color: Color.fromARGB(255, 231, 231, 231),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 5),
+              const Divider(
+                color: Colors.orange,
+                endIndent: 165,
+                indent: 165,
+                thickness: 5,
+              ),
+              const SizedBox(height: 10),
+              const Divider(
+                endIndent: 15,
+                indent: 15,
+              ),
+              const SizedBox(height: 10),
+              Text(
+                'Title',
+                style: GoogleFonts.roboto(
+                  fontSize: 19,
+                  fontWeight: FontWeight.w500,
+                  color: const Color.fromARGB(255, 77, 77, 77),
+                ),
+              ),
+              const SizedBox(height: 10),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: TextFormField(
+                  controller: titleEditingController,
+                  decoration: const InputDecoration(
+                    filled: true,
+                    contentPadding: EdgeInsets.all(15),
+                    hintText: 'Task Tile',
+                    fillColor: Colors.white,
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                'Discription',
+                style: GoogleFonts.roboto(
+                  fontSize: 19,
+                  fontWeight: FontWeight.w500,
+                  color: const Color.fromARGB(255, 77, 77, 77),
+                ),
+              ),
+              const SizedBox(height: 10),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: TextFormField(
+                  controller: discriptionEdController,
+                  maxLines: 5,
+                  decoration: const InputDecoration(
+                    contentPadding: EdgeInsets.all(15),
+                    filled: true,
+                    hintText: 'Task discription',
+                    fillColor: Colors.white,
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 30),
+              SizedBox(
+                height: 60,
+                width: 400,
+                child: ElevatedButton(
+                    style: ButtonStyle(
+                        shape: MaterialStatePropertyAll(BeveledRectangleBorder(
+                            borderRadius: BorderRadius.circular(8))),
+                        backgroundColor:
+                            const MaterialStatePropertyAll(Colors.orange)),
+                    onPressed: () {
+                      addDate(
+                          titleEditingController: titleEditingController,
+                          discriptionEdController: discriptionEdController,
+                          ctx: context);
+                    },
+                    child: Text(
+                      'Create',
+                      style: GoogleFonts.roboto(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    )),
+              ),
+              const SizedBox(height: 150),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future addDate(
+      {required titleEditingController,
+      required discriptionEdController,
+      required ctx}) async {
+    final title = titleEditingController.text;
+    final discription = discriptionEdController.text;
+    final body = {
+      "title": title,
+      "description": discription,
+      "is_completed": false
+    };
+    const url = "https://api.nstack.in/v1/todos";
+    final uri = Uri.parse(url);
+    final response = await http.post(
+      uri,
+      body: jsonEncode(body),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 201) {
+      titleEditingController.text = '';
+      discriptionEdController.text = '';
+      showScatforldMassegTrue('Creation succuess', ctx);
+    } else {
+      showScatforldMassegFalse('Creation failer', ctx);
+      // ignore: avoid_print
+      print(response.body);
+    }
+  }
+
+  showScatforldMassegTrue(String massege, ctx) {
+    final snackBar = SnackBar(
+      content: Text(massege),
+      backgroundColor: Colors.green,
+    );
+    ScaffoldMessenger.of(ctx).showSnackBar(snackBar);
+  }
+
+  showScatforldMassegFalse(String massege, ctx) {
+    final snackBar = SnackBar(
+      content: Text(
+        massege,
+        style: const TextStyle(color: Colors.white),
+      ),
+      backgroundColor: Colors.red,
+    );
+    ScaffoldMessenger.of(ctx).showSnackBar(snackBar);
   }
 }
 
@@ -92,7 +316,7 @@ class BuildBIgBoxHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 249, 248, 248),
+          color: const Color.fromARGB(255, 243, 242, 242),
           borderRadius: BorderRadius.circular(32)),
       height: 230,
       width: double.infinity,
@@ -154,7 +378,7 @@ class BuildSmallBoxHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 249, 248, 248),
+          color: const Color.fromARGB(255, 243, 242, 242),
           borderRadius: BorderRadius.circular(32)),
       height: 120,
       width: double.infinity,
@@ -213,7 +437,7 @@ class HomeCard extends StatelessWidget {
             height: 220,
             width: double.infinity,
             decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 255, 230, 0),
+                color: const Color.fromARGB(255, 255, 166, 0),
                 borderRadius: BorderRadius.circular(28)),
             child: Padding(
               padding: const EdgeInsets.all(12.0),

@@ -2,9 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:to_do/main.dart';
 import 'package:to_do/screens/list_of_task.dart';
 import 'package:http/http.dart' as http;
 import 'package:to_do/screens/search_screen.dart';
+import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 
 class HomeMain extends StatelessWidget {
   const HomeMain({super.key});
@@ -12,25 +14,25 @@ class HomeMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
               const SizedBox(height: 30),
-              Padding(
-                  padding: const EdgeInsets.only(left: 25.0, right: 25),
-                  child: GestureDetector(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (ctx) => const SearchScreen()));
                     },
                     child: Container(
                       height: 45,
-                      width: double.infinity,
+                      width: 270,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(22),
                         border: Border.all(
                           color: Colors.grey,
                           width: .9,
@@ -46,7 +48,36 @@ class HomeMain extends StatelessWidget {
                         ),
                       ),
                     ),
-                  )),
+                  ),
+                  SizedBox(
+                    height: 45,
+                    child: ValueListenableBuilder<ThemeMode>(
+                      valueListenable: themNotifier,
+                      builder: (_, mode, __) {
+                        return LiteRollingSwitch(
+                          onTap: () {
+                            themNotifier.value = mode == ThemeMode.light
+                                ? ThemeMode.dark
+                                : ThemeMode.light;
+                          },
+                          onDoubleTap: () {},
+                          onSwipe: () {},
+                          onChanged: (value) {},
+                          value: true,
+                          textOn: 'lite',
+                          textOff: 'dark',
+                          colorOn: const Color.fromARGB(255, 215, 215, 215),
+                          textSize: 18,
+                          width: 100,
+                          colorOff: Colors.black,
+                          iconOn: Icons.light_mode,
+                          iconOff: Icons.dark_mode,
+                        );
+                      },
+                    ),
+                  )
+                ],
+              ),
               const HomeCard(),
               Padding(
                 padding: const EdgeInsets.only(left: 18.0, right: 18),
@@ -146,8 +177,8 @@ class BuildBottomSheet extends StatelessWidget {
     TextEditingController discriptionEdController = TextEditingController();
     return Container(
       decoration: const BoxDecoration(
-        color: Color.fromARGB(255, 231, 231, 231),
-      ),
+          // color: Color.fromARGB(255, 231, 231, 231),
+          ),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: SingleChildScrollView(

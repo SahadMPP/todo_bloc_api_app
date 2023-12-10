@@ -15,9 +15,9 @@ class ListOfTask extends StatelessWidget {
 
     load();
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        // backgroundColor: Colors.white,
         centerTitle: true,
         title: Text(
           'My Task',
@@ -64,6 +64,7 @@ class ListOfTask extends StatelessWidget {
                           ),
                         ),
                         trailing: PopupMenuButton(
+                          iconColor: Colors.black,
                           onSelected: (value) {
                             if (value == 'Edit') {
                               Navigator.of(context).push(MaterialPageRoute(

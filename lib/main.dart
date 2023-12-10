@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:to_do/build_widger/bottomnavigation.dart';
+import 'package:to_do/screens/splash_screen.dart';
 import 'package:to_do/task/task_bloc.dart';
 
 void main() {
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
             darkTheme: ThemeData.dark(),
             theme: ThemeData.light(),
             title: "todo",
-            home: const BuildBottomNavigator(),
+            home: const SplachScreen(),
           );
         },
       ),

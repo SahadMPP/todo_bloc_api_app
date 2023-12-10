@@ -29,12 +29,17 @@ class _BuildBottomNavigatorState extends State<BuildBottomNavigator> {
             selectedIndex = value;
           });
         },
+        indicatorColor: Colors.transparent,
         labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         destinations: const [
           NavigationDestination(
-              icon: Icon(Icons.home, size: 30), label: 'Home'),
+            icon: Icon(Icons.home, size: 30),
+            label: 'Home',
+          ),
           NavigationDestination(
-              icon: Icon(Icons.person, size: 30), label: 'profile'),
+            icon: Icon(Icons.person, size: 30),
+            label: 'profile',
+          ),
         ],
       ),
       body: pages[selectedIndex],

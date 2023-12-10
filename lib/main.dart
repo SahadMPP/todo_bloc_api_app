@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:to_do/screens/home_m_.dart';
+import 'package:to_do/screens/profile_screen.dart';
 import 'package:to_do/task/task_bloc.dart';
 
 void main() {
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "todo",
-        home: HomeMain(),
+        home: ProfileScreen(),
       ),
     );
   }

@@ -15,9 +15,7 @@ class ListOfTask extends StatelessWidget {
 
     load();
     return Scaffold(
-      // backgroundColor: Colors.white,
       appBar: AppBar(
-        // backgroundColor: Colors.white,
         centerTitle: true,
         title: Text(
           'My Task',

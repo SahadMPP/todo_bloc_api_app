@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:to_do/build_widger/profile_card.dart';
+import 'package:to_do/build_widger/profle_heading.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -67,73 +69,5 @@ class ProfileScreen extends StatelessWidget {
         ],
       ),
     ));
-  }
-}
-
-class BuildProfileHeading extends StatelessWidget {
-  final String heading;
-  const BuildProfileHeading({
-    super.key,
-    required this.heading,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 150),
-      child: Text(
-        heading,
-        style: GoogleFonts.aBeeZee(
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    );
-  }
-}
-
-class BuildProfielCard extends StatelessWidget {
-  final String title;
-  final String? trallingText;
-  final IconData leadingIcon;
-  const BuildProfielCard({
-    super.key,
-    required this.title,
-    this.trallingText,
-    required this.leadingIcon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 25, right: 25),
-      child: SizedBox(
-        height: 60,
-        width: double.infinity,
-        // color: const Color.fromARGB(255, 48, 48, 48),
-        child: ListTile(
-          leading: Icon(
-            leadingIcon,
-            size: 27,
-          ),
-          title: Text(
-            title,
-            style: GoogleFonts.roboto(
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
-              letterSpacing: .5,
-            ),
-          ),
-          trailing: Text(
-            trallingText ?? '',
-            style: GoogleFonts.roboto(
-              fontSize: 17,
-              fontWeight: FontWeight.w500,
-              letterSpacing: .5,
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }

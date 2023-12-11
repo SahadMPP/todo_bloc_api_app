@@ -14,9 +14,7 @@ class SearchScreen extends StatelessWidget {
 
     load();
     return Scaffold(
-      // backgroundColor: Colors.white,
       appBar: AppBar(
-        // backgroundColor: Colors.white,
         title: TextField(
           decoration: InputDecoration(
               contentPadding: const EdgeInsets.all(10),

@@ -14,70 +14,73 @@ class HomeMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (ctx) => const SearchScreen()));
+              },
+              child: Container(
+                height: 45,
+                width: 250,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(22),
+                  border: Border.all(
+                    color: Colors.grey,
+                    width: .9,
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Text(
+                    'Search here',
+                    style: GoogleFonts.roboto(
+                      fontSize: 15,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(width: 10),
+            SizedBox(
+              height: 45,
+              child: ValueListenableBuilder<ThemeMode>(
+                valueListenable: themNotifier,
+                builder: (_, mode, __) {
+                  return LiteRollingSwitch(
+                    onTap: () {
+                      themNotifier.value = mode == ThemeMode.light
+                          ? ThemeMode.dark
+                          : ThemeMode.light;
+                    },
+                    onDoubleTap: () {},
+                    onSwipe: () {},
+                    onChanged: (value) {},
+                    value: true,
+                    textOn: 'lite',
+                    textOff: 'dark',
+                    colorOn: const Color.fromARGB(255, 215, 215, 215),
+                    textSize: 18,
+                    width: 100,
+                    colorOff: Colors.black,
+                    iconOn: Icons.light_mode,
+                    iconOff: Icons.dark_mode,
+                  );
+                },
+              ),
+            )
+          ],
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
-              const SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (ctx) => const SearchScreen()));
-                    },
-                    child: Container(
-                      height: 45,
-                      width: 270,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(22),
-                        border: Border.all(
-                          color: Colors.grey,
-                          width: .9,
-                        ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Text(
-                          'Search here',
-                          style: GoogleFonts.aBeeZee(
-                            letterSpacing: 1,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 45,
-                    child: ValueListenableBuilder<ThemeMode>(
-                      valueListenable: themNotifier,
-                      builder: (_, mode, __) {
-                        return LiteRollingSwitch(
-                          onTap: () {
-                            themNotifier.value = mode == ThemeMode.light
-                                ? ThemeMode.dark
-                                : ThemeMode.light;
-                          },
-                          onDoubleTap: () {},
-                          onSwipe: () {},
-                          onChanged: (value) {},
-                          value: true,
-                          textOn: 'lite',
-                          textOff: 'dark',
-                          colorOn: const Color.fromARGB(255, 215, 215, 215),
-                          textSize: 18,
-                          width: 100,
-                          colorOff: Colors.black,
-                          iconOn: Icons.light_mode,
-                          iconOff: Icons.dark_mode,
-                        );
-                      },
-                    ),
-                  )
-                ],
-              ),
               const HomeCard(),
               Padding(
                 padding: const EdgeInsets.only(left: 18.0, right: 18),
@@ -296,7 +299,7 @@ class BuildBottomSheet extends StatelessWidget {
                         ),
                       )),
                 ),
-                const SizedBox(height: 150),
+                const SizedBox(height: 300),
               ],
             ),
           ),
@@ -483,7 +486,7 @@ class HomeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
+      padding: const EdgeInsets.only(left: 30, right: 30),
       child: Stack(
         alignment: AlignmentDirectional.centerEnd,
         children: [
@@ -536,7 +539,6 @@ class HomeCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 50),
             child: SizedBox(
-              height: 250,
               width: 160,
               child: Image.asset(
                 'asset/Screenshot_2023-12-09_143553-removebg-preview.png',

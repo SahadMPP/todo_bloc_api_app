@@ -19,10 +19,11 @@ class SearchScreen extends StatelessWidget {
         // backgroundColor: Colors.white,
         title: TextField(
           decoration: InputDecoration(
-              contentPadding: const EdgeInsets.all(12),
+              contentPadding: const EdgeInsets.all(10),
               hintText: 'Search here',
               hintStyle: GoogleFonts.aBeeZee(letterSpacing: 1),
-              border: const OutlineInputBorder()),
+              border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20)))),
         ),
       ),
       body: BlocBuilder<TaskBloc, TaskState>(

@@ -1,22 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:to_do/build_widger/bottomnavigation.dart';
 
-class SplachScreen extends StatefulWidget {
+class SplachScreen extends StatelessWidget {
   const SplachScreen({super.key});
 
   @override
-  State<SplachScreen> createState() => _SplachScreenState();
-}
-
-class _SplachScreenState extends State<SplachScreen> {
-  @override
-  void initState() {
-    enterToHome();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    enterToHome(context);
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 244, 244, 244),
       body: Center(
@@ -32,7 +23,7 @@ class _SplachScreenState extends State<SplachScreen> {
     );
   }
 
-  Future<void> enterToHome() async {
+  Future<void> enterToHome(context) async {
     await Future.delayed(const Duration(seconds: 3));
     // ignore: use_build_context_synchronously
     Navigator.of(context).pushAndRemoveUntil(

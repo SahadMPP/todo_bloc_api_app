@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:to_do/screens/home_m.dart';
-import 'package:to_do/screens/profile_screen.dart';
+import 'package:to_do/feature/home/ui/home_ui.dart';
+import 'package:to_do/feature/profile/ui/profile.dart';
 
 class BuildBottomNavigator extends StatefulWidget {
   const BuildBottomNavigator({super.key});

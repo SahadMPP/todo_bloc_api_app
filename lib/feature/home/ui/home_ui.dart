@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:to_do/build_widger/bottom_sheet.dart';
 import 'package:to_do/build_widger/home_appbar.dart';
 import 'package:to_do/build_widger/home_big_box.dart';
 import 'package:to_do/build_widger/home_box_one.dart';
 import 'package:to_do/build_widger/home_card.dart';
-import 'package:to_do/screens/list_of_task.dart';
+import 'package:to_do/feature/add_task/ui/add_task_ui.dart';
+import 'package:to_do/feature/list_of_task/ui/list_of_task_ui.dart';
 
 class HomeMain extends StatelessWidget {
   const HomeMain({super.key});
@@ -49,11 +49,8 @@ class HomeMain extends StatelessWidget {
                               ),
                               InkWell(
                                 onTap: () {
-                                  showModalBottomSheet(
-                                      context: context,
-                                      builder: (context) {
-                                        return const BuildBottomSheet();
-                                      });
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => const DataAddUI()));
                                 },
                                 child: const BuildBIgBoxHome(
                                     text1: "Add New",

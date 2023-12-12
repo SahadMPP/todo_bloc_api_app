@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
+import 'package:to_do/feature/search/ui/search_ui.dart';
 import 'package:to_do/main.dart';
-import 'package:to_do/screens/search_screen.dart';
 
 AppBar appbar(context) {
   return AppBar(

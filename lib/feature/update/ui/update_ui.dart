@@ -55,7 +55,6 @@ class UpdateTaskScreen extends StatelessWidget {
                   },
                   decoration: const InputDecoration(
                     filled: true,
-                    fillColor: Color.fromARGB(255, 254, 237, 85),
                     border: UnderlineInputBorder(
                       borderSide: BorderSide.none,
                     ),
@@ -89,7 +88,6 @@ class UpdateTaskScreen extends StatelessWidget {
                   maxLines: 5,
                   decoration: const InputDecoration(
                     filled: true,
-                    fillColor: Color.fromARGB(255, 254, 237, 85),
                     border: UnderlineInputBorder(
                       borderSide: BorderSide.none,
                     ),

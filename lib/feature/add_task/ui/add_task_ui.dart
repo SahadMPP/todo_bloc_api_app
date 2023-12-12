@@ -2,22 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:to_do/function/add_data.dart';
 
-class BuildBottomSheet extends StatelessWidget {
-  const BuildBottomSheet({
-    super.key,
-  });
+class DataAddUI extends StatelessWidget {
+  const DataAddUI({super.key});
 
   @override
   Widget build(BuildContext context) {
     TextEditingController titleEditingController = TextEditingController();
     TextEditingController discriptionEdController = TextEditingController();
     GlobalKey<FormState> formkey = GlobalKey<FormState>();
-    return Container(
-      decoration: const BoxDecoration(
-          // color: Color.fromARGB(255, 231, 231, 231),
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          'Add Your Task',
+          style: GoogleFonts.roboto(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
           ),
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(22.0),
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Form(
@@ -25,19 +30,6 @@ class BuildBottomSheet extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 5),
-                const Divider(
-                  color: Colors.orange,
-                  endIndent: 165,
-                  indent: 165,
-                  thickness: 5,
-                ),
-                const SizedBox(height: 10),
-                const Divider(
-                  endIndent: 15,
-                  indent: 15,
-                ),
-                const SizedBox(height: 10),
                 Text(
                   'Title',
                   style: GoogleFonts.roboto(
@@ -63,7 +55,6 @@ class BuildBottomSheet extends StatelessWidget {
                       filled: true,
                       contentPadding: EdgeInsets.all(15),
                       hintText: 'Task Tile',
-                      fillColor: Colors.white,
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
                       ),
@@ -97,7 +88,6 @@ class BuildBottomSheet extends StatelessWidget {
                       contentPadding: EdgeInsets.all(15),
                       filled: true,
                       hintText: 'Task discription',
-                      fillColor: Colors.white,
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
                       ),
@@ -132,7 +122,6 @@ class BuildBottomSheet extends StatelessWidget {
                         ),
                       )),
                 ),
-                const SizedBox(height: 300),
               ],
             ),
           ),

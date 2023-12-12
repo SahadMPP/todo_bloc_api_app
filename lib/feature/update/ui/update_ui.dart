@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:to_do/function/update.dart';
+import 'package:to_do/feature/update/bloc/update_bloc.dart';
 
 class UpdateTaskScreen extends StatelessWidget {
   final Map todo;
@@ -113,12 +114,13 @@ class UpdateTaskScreen extends StatelessWidget {
                                 MaterialStatePropertyAll(Colors.orange)),
                         onPressed: () {
                           if (formkey.currentState!.validate()) {
-                            updateData(
-                                todo: todo,
-                                titleEditController: titleEditController,
-                                discriptionEditController:
-                                    discriptionEditController,
-                                context: context);
+                            context.read<UpdateBloc>().add(
+                                UpdateDateOnButtonClick(
+                                    textTitlecontroller: titleEditController,
+                                    textDiscriptioncontroller:
+                                        discriptionEditController,
+                                    contex: context,
+                                    todo: todo));
                             Navigator.of(context).pop();
                           }
                         },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:to_do/function/add_data.dart';
+import 'package:to_do/feature/add_task/bloc/add_task_bloc.dart';
 
 class DataAddUI extends StatelessWidget {
   const DataAddUI({super.key});
@@ -107,10 +108,12 @@ class DataAddUI extends StatelessWidget {
                               const MaterialStatePropertyAll(Colors.orange)),
                       onPressed: () {
                         if (formkey.currentState!.validate()) {
-                          addDate(
-                              titleEditingController: titleEditingController,
-                              discriptionEdController: discriptionEdController,
-                              ctx: context);
+                          context.read<AddTaskBloc>().add(
+                              AddTaskOnButtonClickEvent(
+                                  textTitlecontroller: titleEditingController,
+                                  textDiscriptioncontroller:
+                                      discriptionEdController,
+                                  contex: context));
                         }
                       },
                       child: Text(

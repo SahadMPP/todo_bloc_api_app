@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:to_do/task/task_bloc.dart';
+import 'package:to_do/feature/list_of_task/task/task_bloc.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
